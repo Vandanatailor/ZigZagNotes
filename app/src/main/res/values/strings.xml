@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ZigZagNotes</string>
+    <string name="no_notes_avilable">No notes avilable</string>
 </resources>
