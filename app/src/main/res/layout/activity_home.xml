@@ -5,45 +5,57 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.home.view.HomeActivity">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:text="Notes"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_22sdp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:orientation="vertical"
-        >
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rvData"
-        />
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_gravity="center_horizontal"
-            >
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_150sdp"
+                android:layout_gravity="center_horizontal"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
-                android:layout_gravity="center_horizontal"
-                app:lottie_rawRes="@raw/add_notes" />
+                app:lottie_rawRes="@raw/gif_no_item" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/no_notes_avilable"
                 android:textSize="@dimen/_10ssp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                />
+                android:textStyle="bold" />
         </LinearLayout>
 
 
@@ -51,43 +63,42 @@
 
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rlAdd"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_circle">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Yours \nthoughts"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:textSize="@dimen/_10ssp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginStart="@dimen/_3sdp"
-        android:id="@+id/add_thought"
-        />
+        android:background="@drawable/bg_circle"
+        android:visibility="gone">
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="explore \nnew"
-        android:textSize="@dimen/_10ssp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:textStyle="bold"
-        android:gravity="center"
-       android:id="@+id/explore_new"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/_3sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        />
+            android:id="@+id/add_thought"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="Add Yours \nthoughts"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/explore_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="explore \nnew"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lv_addNotes"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="@dimen/_70sdp"
         android:layout_alignParentBottom="true"
@@ -95,7 +106,6 @@
         android:layout_marginBottom="@dimen/_minus10sdp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:id="@+id/lv_addNotes"
         app:lottie_rawRes="@raw/add_notes" />
 
 </RelativeLayout>
