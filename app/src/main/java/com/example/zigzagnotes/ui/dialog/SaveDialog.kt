@@ -12,12 +12,13 @@ class SaveDialog {
     private var dialog: Dialog? = null
     var context: Context? = null
     lateinit var popupSaveChangesBinding: PopupSaveChangesBinding
-    lateinit var onClick_: onClick
+    lateinit var onClick: onClick
 
-    fun onSaveChangedDialog(context: Context?) {
+    fun onSaveChangedDialog(context: Context?,onClick: onClick) {
 
         this.context = context
         dialog = Dialog(context!!)
+        this.onClick=onClick
         dialog!!.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
         dialog!!.setCancelable(true)
         popupSaveChangesBinding = PopupSaveChangesBinding.inflate(LayoutInflater.from(context))
@@ -32,13 +33,20 @@ class SaveDialog {
             dialog!!.show()
         }
 
+        popupSaveChangesBinding.tvSave.setOnClickListener {
+            dialog?.dismiss()
+            onClick.onSaveData()
+        }
+
+        popupSaveChangesBinding.tvDiscard.setOnClickListener {
+            dialog?.dismiss()
+        }
+
     }
 
 }
 
 
 interface onClick {
-    fun onSelectGender(value: String);
-    fun onSelectDate(value: String)
-
+    fun onSaveData()
 }

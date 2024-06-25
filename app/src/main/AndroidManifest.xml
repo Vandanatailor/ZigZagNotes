@@ -16,7 +16,7 @@
             android:name=".ui.AddNotesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.home.view.HomeActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

@@ -59,12 +59,14 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:orientation="vertical">
 
-        <TextView
+        <EditText
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:background="@null"
+            android:hint="@string/title"
             android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="@dimen/_30ssp"
             android:textStyle="bold" />
 
@@ -72,15 +74,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
             android:layout_marginVertical="@dimen/_10sdp"
-            android:background="@color/black_gray"
-            />
+            android:background="@color/black_gray" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_type_some"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type Something....."
+            android:hint="@string/type_something_here"
             android:textColor="@color/black_gray"
+            android:textColorHint="@color/black_gray"
             android:textSize="@dimen/_15ssp"
             android:textStyle="normal" />
 
