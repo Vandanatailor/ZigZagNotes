@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         overFun()
     }
-    private fun overFun(){
+    private fun overFun()
+    {
         Handler(Looper.getMainLooper()).postDelayed({
             val intent: Intent = Intent(
                 this@MainActivity,
@@ -23,5 +24,4 @@ class MainActivity : AppCompatActivity() {
             finish()
         }, 1800)
     }
-
 }

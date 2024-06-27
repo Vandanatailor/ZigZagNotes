@@ -5,39 +5,58 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.home.view.HomeActivity">
 
-    <TextView
-        android:id="@+id/tv_title"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/ln_header"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginVertical="@dimen/_10sdp"
+        >
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Notes"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="@dimen/_22sdp"
+        android:layout_weight="1"
         android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/delete_all"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/gray_bg_"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/img_all_delete" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
-        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_below="@id/ln_header"
+        android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvData"
+            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
+            android:id="@+id/ln_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="@dimen/_150sdp"
@@ -58,9 +77,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/rlAdd"
