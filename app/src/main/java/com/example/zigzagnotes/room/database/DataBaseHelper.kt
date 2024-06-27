@@ -8,5 +8,5 @@ interface DataBaseHelper {
     suspend fun deleteDataById(id : Int)
     suspend fun getNotesById(id : Int) : NoteModel
     suspend fun updateDataById(id: Int,title : String ,description : String)
-
+    suspend fun deleteAllNotes(notes: List<NoteModel>)
 }

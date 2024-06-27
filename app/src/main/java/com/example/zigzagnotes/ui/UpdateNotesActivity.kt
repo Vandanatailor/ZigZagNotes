@@ -2,6 +2,7 @@ package com.example.zigzagnotes.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,6 +40,10 @@ class UpdateNotesActivity : AppCompatActivity() {
         binding.eyeSave.setOnClickListener {
             updateData()
         }
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getNoesDataById(){
@@ -57,6 +62,8 @@ class UpdateNotesActivity : AppCompatActivity() {
         lifecycleScope.launch {
             databaseHelper.updateDataById(id, title =title,description=description )
             Log.d("gfgfgfgfg", "UpdateData: ")
+            Toast.makeText(this@UpdateNotesActivity,"Update successfully",Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

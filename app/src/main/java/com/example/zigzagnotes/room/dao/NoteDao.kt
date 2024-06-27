@@ -20,7 +20,7 @@ interface NoteDao {
     suspend fun getNotesById(id : Int): NoteModel
 
     @Delete
-    fun deleteAllNotes(notesallDelete: NoteModel)
+    fun deleteAllNotes(notesallDelete: List<NoteModel>)
 
     @Query("DELETE FROM notemodel WHERE id = :id")
     suspend fun deleteById(id: Int)

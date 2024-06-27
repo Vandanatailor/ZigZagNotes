@@ -71,14 +71,18 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
         binding.rvData.layoutManager = linearLayoutManager
         notesAdapter = NotesAdapter(this, notesList,this)
         binding.rvData.adapter = notesAdapter
-        if (notesList.isEmpty()) {
+        notesAdapter.notifyDataSetChanged()
+        visiblityPLaceholder()
+    }
+
+    private fun visiblityPLaceholder(){
+        if (notesList.isEmpty() || notesList==null) {
             binding.lnPlaceholder.visibility = View.VISIBLE
             binding.rvData.visibility = View.GONE
         } else {
             binding.lnPlaceholder.visibility = View.GONE
             binding.rvData.visibility = View.VISIBLE
         }
-        notesAdapter.notifyDataSetChanged()
     }
     private fun getData(){
         lifecycleScope.launch {
@@ -105,6 +109,7 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
                 withContext(Dispatchers.Main) {
                     notesList.removeAt(position)
                     notesAdapter.notifyItemRemoved(position)
+                    visiblityPLaceholder()
                 }
             }
         }else if(type.equals(Constants.DataShow)){
@@ -121,6 +126,16 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
     }
 
     override fun onDeleteNotes() {
-
+          lifecycleScope.launch {
+              withContext(Dispatchers.IO){
+                  databaseHelper.deleteAllNotes(notesList)
+                  notesList.clear()
+                  notesList.addAll(databaseHelper.getAllNotes())
+              }
+              withContext(Dispatchers.Main) {
+                  notesAdapter.notifyDataSetChanged()
+                  visiblityPLaceholder()
+              }
+          }
     }
 }
