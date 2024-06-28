@@ -1,6 +1,7 @@
 package com.example.zigzagnotes.ui
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.zigzagnotes.room.database.DataBaseHelperImp
 import com.example.zigzagnotes.room.database.DatabaseBuilder
 import com.example.zigzagnotes.ui.dialog.SaveDialog
 import com.example.zigzagnotes.ui.dialog.onClick
+import com.example.zigzagnotes.ui.home.view.HomeActivity
 import kotlinx.coroutines.launch
 
 class AddNotesActivity : AppCompatActivity(), onClick {
@@ -39,7 +41,7 @@ class AddNotesActivity : AppCompatActivity(), onClick {
         val title = activityAddNotesBinding.title.text.toString().trim()
         val description = activityAddNotesBinding.tvTypeSome.text.toString().trim()
 
-        if (title.isNotEmpty() && description.isNotEmpty()) {
+        if (title.isNotEmpty() && description.isNotEmpty() ) {
             val note = NoteModel(title = title, description = description)
             val notesList = mutableListOf(note)
 
@@ -52,6 +54,10 @@ class AddNotesActivity : AppCompatActivity(), onClick {
                         this@AddNotesActivity, "Saved successfully",
                         Toast.LENGTH_SHORT
                     ).show()
+                    val intent: Intent = Intent(
+                        this@AddNotesActivity, HomeActivity::class.java
+                    )
+                    startActivity(intent)
                 } catch (e: Exception) {
                     Log.d("PrintLog", "insertNotes: " + e.message)
                 }

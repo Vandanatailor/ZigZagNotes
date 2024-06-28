@@ -1,5 +1,6 @@
 package com.example.zigzagnotes.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.example.zigzagnotes.model.NoteModel
 import com.example.zigzagnotes.room.database.DataBaseHelperImp
 import com.example.zigzagnotes.room.database.DatabaseBuilder
 import com.example.zigzagnotes.ui.adpter.NotesAdapter
+import com.example.zigzagnotes.ui.home.view.HomeActivity
 import com.example.zigzagnotes.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +26,8 @@ class UpdateNotesActivity : AppCompatActivity() {
     private lateinit var binding :ActivityUpdateNotesBinding
     private lateinit var databaseHelper: DataBaseHelperImp
     private var id : Int = 0
+    private var title : String = ""
+    private var description : String=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +38,20 @@ class UpdateNotesActivity : AppCompatActivity() {
         databaseHelper = DataBaseHelperImp(notesDatabase)
           getNoesDataById()
         onClickHandel()
+
     }
 
     private fun onClickHandel() {
-        binding.eyeSave.setOnClickListener {
+        binding.ivUpdateChanges.setOnClickListener {
             updateData()
         }
 
         binding.ivBack.setOnClickListener {
             finish()
+        }
+
+        binding.ivShare.setOnClickListener {
+            shareData()
         }
     }
 
@@ -51,7 +60,9 @@ class UpdateNotesActivity : AppCompatActivity() {
             val note = withContext(Dispatchers.IO) {
                 databaseHelper.getNotesById(id)
             }
-            binding.title.setText(note.title)
+          title=  note.title
+          description=  note.description
+          binding.title.setText(note.title)
             binding.tvTypeSome.setText(note.description)
         }
     }
@@ -64,9 +75,18 @@ class UpdateNotesActivity : AppCompatActivity() {
             Log.d("gfgfgfgfg", "UpdateData: ")
             Toast.makeText(this@UpdateNotesActivity,"Update successfully",Toast.LENGTH_SHORT
             ).show()
+            val intent: Intent = Intent(
+                this@UpdateNotesActivity, HomeActivity::class.java
+            )
+            startActivity(intent)
         }
     }
-
-
+    private fun shareData(){
+        val shareIntent =Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain")
+        shareIntent.putExtra(Intent.EXTRA_TEXT,title)
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, description)
+        startActivity(Intent.createChooser(shareIntent, "Share..."))
+    }
 }
 

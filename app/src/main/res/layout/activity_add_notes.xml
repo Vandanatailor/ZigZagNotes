@@ -33,13 +33,13 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/gray_bg_"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/visibility" />
+<!--            <ImageView-->
+<!--                android:layout_width="@dimen/_30sdp"-->
+<!--                android:layout_height="@dimen/_30sdp"-->
+<!--                android:layout_marginEnd="@dimen/_10sdp"-->
+<!--                android:background="@drawable/gray_bg_"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                android:src="@drawable/visibility" />-->
 
             <ImageView
                 android:id="@+id/iv_save_changes"
@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:background="@drawable/gray_bg_"
                 android:padding="@dimen/_5sdp"
-                android:src="@drawable/save" />
+                android:src="@drawable/save"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -68,6 +68,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="@dimen/_30ssp"
+            android:maxLength="20"
+            android:imeOptions="actionNext"
             android:textStyle="bold" />
 
         <View

@@ -35,24 +35,22 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ln_header"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvData"
             android:visibility="visible"
+            android:layout_below="@id/ln_header"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <LinearLayout
+            android:layout_centerInParent="true"
             android:id="@+id/ln_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:orientation="vertical"
@@ -77,7 +75,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rlAdd"
@@ -116,8 +113,8 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lv_addNotes"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_minus10sdp"
         android:layout_marginBottom="@dimen/_minus10sdp"

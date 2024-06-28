@@ -41,12 +41,11 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
 
         val notesDatabase = DatabaseBuilder.getInstance(this)
         databaseHelper = DataBaseHelperImp(notesDatabase)
-
         dialog = Dialog(this)
         deleteDialog.onDeleteDialog(this,this)
-
         setBottomVisiblity()
         getData()
+
     }
 
     private fun onClickEventsHandel() {
@@ -76,7 +75,7 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
     }
 
     private fun visiblityPLaceholder(){
-        if (notesList.isEmpty() || notesList==null) {
+        if (notesList.isEmpty()) {
             binding.lnPlaceholder.visibility = View.VISIBLE
             binding.rvData.visibility = View.GONE
         } else {
@@ -138,4 +137,6 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
               }
           }
     }
+
+
 }
