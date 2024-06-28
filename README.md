@@ -42,4 +42,9 @@ It supports coroutines, making it easy to do database work without slowing down 
 **Saves Data Locally:**
 It keeps your data stored on the device, so it’s available even if the app is closed or restarted.
 
-In simple terms, Room Database makes handling local data in Android apps easier, safer, and more efficient.
+In simple terms, Room Database makes handling local data in Android apps easier, safer, and more efficient.  
+
+
+![homepage](https://github.com/VandanaTailor1/ZigZagNotes/assets/147589879/d33cdbb3-4476-4585-a27b-fe7755328622)![adddatasc](https://github.com/VandanaTailor1/ZigZagNotes/assets/147589879/93f4a79f-ef1a-45c1-8207-3187ce14fa74)![savechanges](https://github.com/VandanaTailor1/ZigZagNotes/assets/147589879/cde34fbc-baad-4c89-ac08-3c884a49279d)![deletebylongpress_sc](https://github.com/VandanaTailor1/ZigZagNotes/assets/147589879/b6b92a9a-0637-4c2c-bd5f-42603c198497)![alldeletesc](https://github.com/VandanaTailor1/ZigZagNotes/assets/147589879/3778ead6-9b25-415f-adca-e0cd32466f31)
+
+
