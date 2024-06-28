@@ -3,7 +3,7 @@
 
 **Overview**
 
-The NoteBook app is a note-taking application built with Kotlin, XML, and Room Database. 
+The ZigZagNotes app is a note-taking application built with Kotlin, XML, and Room Database. 
 It supports CRUD operations, allowing users to create, read, update, and delete notes.
 Room Database ensures data persistence and works efficiently with Kotlin Coroutines for background tasks.
 
