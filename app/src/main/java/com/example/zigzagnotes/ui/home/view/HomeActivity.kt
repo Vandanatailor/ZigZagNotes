@@ -63,7 +63,8 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
 
         binding.deleteAll.setOnClickListener {
             if(notesList.isEmpty()){
-                Toast.makeText(this@HomeActivity, "There is no data for delete", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@HomeActivity, "There is no data for delete",
+                    Toast.LENGTH_SHORT).show()
             }else{
                 deleteDialog.showDialog()
             }
@@ -89,17 +90,20 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
         }
     }
     private fun getData(){
+        Log.d("dataisPrinting", "getData: ")
         lifecycleScope.launch {
+            Log.d("dataisPrinting", "getData: "+notesList)
             try {
                 val allNotes = withContext(Dispatchers.IO) {
                     databaseHelper.getAllNotes()
-
                 }
+
                 notesList.clear()
                 notesList.addAll(allNotes)
                 setAdapter()
                 notesAdapter.notifyDataSetChanged()
             } catch (e: Exception) {
+                Log.d("lllllllllllllll", "getData: "+e.message)
 
             }
         }

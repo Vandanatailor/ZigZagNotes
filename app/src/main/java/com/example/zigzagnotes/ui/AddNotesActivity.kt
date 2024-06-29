@@ -86,5 +86,4 @@ class AddNotesActivity : AppCompatActivity(), onClick {
     override fun onSaveData() {
         insertNotes()
     }
-
 }

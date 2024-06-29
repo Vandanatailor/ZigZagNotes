@@ -98,16 +98,6 @@ class UpdateNotesActivity : AppCompatActivity() {
                     this@UpdateNotesActivity, "Title and description can not be empty", Toast.LENGTH_SHORT
                 ).show()
             }
-
-//            databaseHelper.updateDataById(id, title =title,description=description )
-//            Log.d("gfgfgfgfg", "UpdateData: ")
-//            Toast.makeText(this@UpdateNotesActivity,"Update successfully",Toast.LENGTH_SHORT
-//            ).show()
-//            val intent: Intent = Intent(
-//                this@UpdateNotesActivity, HomeActivity::class.java
-//            )
-//            startActivity(intent)
-
         }
     }
 
