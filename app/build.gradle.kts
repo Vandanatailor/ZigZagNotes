@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -33,6 +34,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    viewBinding {
+        enable=true
+    }
+}
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -45,4 +52,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
+
+    //Lottie
+    implementation(libs.lottie)
+    implementation(libs.joda.time)
+
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.ktx)
 }
