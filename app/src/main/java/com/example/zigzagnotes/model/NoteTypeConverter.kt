@@ -1,5 +1,6 @@
 package com.example.zigzagnotes.model
 
+import android.util.Log
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -15,13 +16,17 @@ class NoteTypeConverter {
 
     @TypeConverter
     fun toNotes(notesString: String): Notes {
-        val type = object : TypeToken<Notes>() {}.type
-        return gson.fromJson(notesString, type)
-//        return try {
-//            gson.fromJson(notesString, Notes::class.java)
-//        } catch (e: JsonSyntaxException) {
-//            // Handle parsing exception
-//            Notes("", "")  // Provide default or empty Notes object as fallback
-//        }
+//        val type = object : TypeToken<Notes>() {}.type
+//        return gson.fromJson(notesString, type)
+        return try {
+            gson.fromJson(notesString, Notes::class.java)
+        } catch (e: JsonSyntaxException) {
+
+           // Handle parsing exception
+            Notes("   ", "")
+
+           // Log.d("NoteTypeConverter", "Failed to convert JSON string to Notes object", e)
+           // null
+        }
     }
 }
