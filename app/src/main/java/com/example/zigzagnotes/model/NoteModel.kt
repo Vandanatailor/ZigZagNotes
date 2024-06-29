@@ -14,4 +14,3 @@ data class NoteModel(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     var notes: Notes
 )
-
