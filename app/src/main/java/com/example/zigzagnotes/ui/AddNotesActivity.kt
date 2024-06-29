@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.zigzagnotes.databinding.ActivityAddNotesBinding
 import com.example.zigzagnotes.model.NoteModel
+import com.example.zigzagnotes.model.Notes
 import com.example.zigzagnotes.room.database.DataBaseHelperImp
 import com.example.zigzagnotes.room.database.DatabaseBuilder
 import com.example.zigzagnotes.ui.dialog.SaveDialog
@@ -42,7 +43,8 @@ class AddNotesActivity : AppCompatActivity(), onClick {
         val description = activityAddNotesBinding.tvTypeSome.text.toString().trim()
 
         if (title.isNotEmpty() && description.isNotEmpty() ) {
-            val note = NoteModel(title = title, description = description)
+            val notess=Notes(title = title, description = description)
+            val note = NoteModel(notes = notess)
             val notesList = mutableListOf(note)
 
             lifecycleScope.launch {

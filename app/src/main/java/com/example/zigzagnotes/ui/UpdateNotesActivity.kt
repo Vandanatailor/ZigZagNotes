@@ -43,7 +43,7 @@ class UpdateNotesActivity : AppCompatActivity() {
 
     private fun onClickHandel() {
         binding.ivUpdateChanges.setOnClickListener {
-            updateData()
+          //  updateData()
         }
 
         binding.ivBack.setOnClickListener {
@@ -60,27 +60,27 @@ class UpdateNotesActivity : AppCompatActivity() {
             val note = withContext(Dispatchers.IO) {
                 databaseHelper.getNotesById(id)
             }
-          title=  note.title
-          description=  note.description
-          binding.title.setText(note.title)
-            binding.tvTypeSome.setText(note.description)
+          title=  note.notes.title
+          description=  note.notes.description
+          binding.title.setText(note.notes.title)
+            binding.tvTypeSome.setText(note.notes.description)
         }
     }
 
-    private fun updateData(){
-        var title =binding.title.text.toString()
-        var description =binding.tvTypeSome.text.toString()
-        lifecycleScope.launch {
-            databaseHelper.updateDataById(id, title =title,description=description )
-            Log.d("gfgfgfgfg", "UpdateData: ")
-            Toast.makeText(this@UpdateNotesActivity,"Update successfully",Toast.LENGTH_SHORT
-            ).show()
-            val intent: Intent = Intent(
-                this@UpdateNotesActivity, HomeActivity::class.java
-            )
-            startActivity(intent)
-        }
-    }
+//    private fun updateData(){
+//        var title =binding.title.text.toString()
+//        var description =binding.tvTypeSome.text.toString()
+//        lifecycleScope.launch {
+//            databaseHelper.updateDataById(id, title =title,description=description )
+//            Log.d("gfgfgfgfg", "UpdateData: ")
+//            Toast.makeText(this@UpdateNotesActivity,"Update successfully",Toast.LENGTH_SHORT
+//            ).show()
+//            val intent: Intent = Intent(
+//                this@UpdateNotesActivity, HomeActivity::class.java
+//            )
+//            startActivity(intent)
+//        }
+//    }
     private fun shareData(){
         val shareIntent =Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain")

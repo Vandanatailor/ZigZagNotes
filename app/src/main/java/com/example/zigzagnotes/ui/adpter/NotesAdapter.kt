@@ -52,8 +52,8 @@ class NotesAdapter ( var  context : Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.title.text=list[position].title
-        holder.binding.description.text=list[position].description
+        holder.binding.title.text=list[position].notes.title
+        holder.binding.description.text=list[position].notes.description
         val randomColor = colors.random()
         val color = ContextCompat.getColor(holder.itemView.context, randomColor)
         holder.binding.lnMainBg.backgroundTintList = ColorStateList.valueOf(color)
