@@ -16,4 +16,7 @@ class DataBaseHelperImp(private val notesDatabase: NotesDatabase) : DataBaseHelp
 
     override suspend fun deleteAllNotes(notes: List<NoteModel>) =
         notesDatabase.notesDao().deleteAllNotes(notes)
+
+    override suspend fun updateData(noteModel: NoteModel) =
+        notesDatabase.notesDao().updateData(noteModel)
 }

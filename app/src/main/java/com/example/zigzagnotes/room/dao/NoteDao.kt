@@ -25,6 +25,9 @@ interface NoteDao {
     @Query("DELETE FROM notemodel WHERE id = :id")
     suspend fun deleteById(id: Int)
 
+    @Update
+    suspend fun updateData(notesModel: NoteModel)
+
 //    @Query("UPDATE notemodel SET title = :title," +
 //            " description = :description WHERE id = :id")
 //    suspend fun updateNoteById(id: Int, title: String, description: String)

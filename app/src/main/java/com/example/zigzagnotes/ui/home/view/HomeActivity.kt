@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -61,7 +62,11 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
         }
 
         binding.deleteAll.setOnClickListener {
-           deleteDialog.showDialog()
+            if(notesList.isEmpty()){
+                Toast.makeText(this@HomeActivity, "There is no data for delete", Toast.LENGTH_SHORT).show()
+            }else{
+                deleteDialog.showDialog()
+            }
         }
     }
 
