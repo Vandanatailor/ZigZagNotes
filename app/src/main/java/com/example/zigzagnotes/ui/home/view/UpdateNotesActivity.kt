@@ -91,6 +91,7 @@ class UpdateNotesActivity : AppCompatActivity() {
                             errorResponse.errorMessage, Toast.LENGTH_SHORT
                         ).show()
                         Log.d("Error", "updateData: ${errorResponse.errorMessage}")
+
                     } else {
                         Toast.makeText(
                             this@UpdateNotesActivity,

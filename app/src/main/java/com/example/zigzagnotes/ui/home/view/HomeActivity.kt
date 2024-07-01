@@ -33,9 +33,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
     private lateinit var dialog: Dialog
     private var deleteDialog= DeleteDialog()
     private lateinit var notesAdapter: NotesAdapter
-
-    //    ++
-    //  private var notesList: List<NoteModel> = listOf()
     private var notesList: MutableList<NoteModel> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,9 +120,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
     override fun selectItemCLick(position: Int, type: String) {
         if (type.equals(Constants.Delete)) {
             lifecycleScope.launch {
-                // withContext(Dispatchers.IO) {
-                // databaseHelper.deleteDataById(notesList[position].id)
-                // }
                 viewModel.deleteById(notesList[position].id)
                 withContext(Dispatchers.Main) {
                     notesList.removeAt(position)
@@ -141,7 +135,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
         }
     }
 
-    //
     override fun onResume() {
         super.onResume()
         getAllData()
