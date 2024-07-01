@@ -52,11 +52,10 @@ class AddNotesActivity : AppCompatActivity(), onClick {
 
    private fun observer(){
         viewModel.errorResponse.observe(this , Observer{
-            errorResponse ->
-            errorResponse?.let {
-                showToast(it.errorMessage)
-                Log.d("PrintLog", "insertNotes: " + it.errorMessage)
-             }
+                if (it != null) {
+                    showToast(it.errorMessage)
+                    Log.d("PrintLog", "insertNotes: " + it.errorMessage)
+                }
         })
 
    }

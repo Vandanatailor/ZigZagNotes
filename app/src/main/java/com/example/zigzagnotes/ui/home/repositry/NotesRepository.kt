@@ -19,12 +19,13 @@ class NotesRepository @Inject constructor(private val notesDao: NoteDao) {
     }
      fun getAll() = notesDao.getAllNotesData()
 
-//    suspend fun getAll() : ErrorResponse?{
-//       return try {
-//            notesDao.getAllNotesData()
-//        }catch (e : Exception){
-//            ErrorResponse(500, "Failed to insert note: ${e.message}")
-//        }
-//    }
+    suspend fun deleteById(id : Int) : ErrorResponse? {
+        return try {
+            notesDao.deleteById(id)
+            null
+        }catch (e : Exception){
+            ErrorResponse(500, "Failed to insert note: ${e.message}")
+        }
+    }
 
 }
