@@ -41,9 +41,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        val notesDatabase = DatabaseBuilder.getInstance(this)
-//        databaseHelper = DataBaseHelperImp(notesDatabase)
         dialog = Dialog(this)
         deleteDialog.onDeleteDialog(this,this)
         setBottomVisiblity()
@@ -77,10 +74,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
             }
         }
     }
-
-//    override fun onDeleteNotes() {
-//        TODO("Not yet implemented")
-//    }
 
     private fun setAdapter() {
         val linearLayoutManager = GridLayoutManager(this, 2)
@@ -127,25 +120,6 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    //    private fun getData(){
-//        Log.d("dataisPrinting", "getData: ")
-//        lifecycleScope.launch {
-//            Log.d("dataisPrinting", "getData: "+notesList)
-//            try {
-//                val allNotes = withContext(Dispatchers.IO) {
-//                    databaseHelper.getAllNotes()
-//                }
-//
-//                notesList.clear()
-//                notesList.addAll(allNotes)
-//                setAdapter()
-//                notesAdapter.notifyDataSetChanged()
-//            } catch (e: Exception) {
-//                Log.d("lllllllllllllll", "getData: "+e.message)
-//
-//            }
-//        }
-//    }
     override fun selectItemCLick(position: Int, type: String) {
         if (type.equals(Constants.Delete)) {
             lifecycleScope.launch {

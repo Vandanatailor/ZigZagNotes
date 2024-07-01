@@ -27,9 +27,6 @@ class UpdateNotesActivity : AppCompatActivity() {
         binding = ActivityUpdateNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         id = intent.getIntExtra(Constants.ID, 0)
-//        val notesDatabase = DatabaseBuilder.getInstance(this)
-//        databaseHelper = DataBaseHelperImp(notesDatabase)
-       // getNoesDataById()
         Log.d("gfgfgfgfgdddddddddd", "onCreate: "+id)
         dataObserver()
         getNotesById()
@@ -76,24 +73,17 @@ class UpdateNotesActivity : AppCompatActivity() {
             shareData()
         }
     }
-    private fun getNoesDataById() {
-     //   lifecycleScope.launch {
-//            val note = withContext(Dispatchers.IO) {
-//                databaseHelper.getNotesById(id)
-//            }
-            //  val note= viewModel.getDataById(id)
-//            title = note.notes.title
-//            description = note.notes.description
-      //  }
-    }
 
     private fun updateData() {
         var title = binding.title.text.toString()
         var description = binding.tvTypeSome.text.toString()
-
         Log.d("hhhhhhhh", "updateData: "+noteModel)
             if (title.isNotEmpty() && description.isNotEmpty()) {
+
+                noteModel.notes.title = title
+                noteModel.notes.description = description
                 viewModel.updateNotes(noteModel)
+
                 viewModel.errorResponse.observe(this, Observer { errorResponse ->
                     if (errorResponse != null) {
                         Toast.makeText(
@@ -113,6 +103,7 @@ class UpdateNotesActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 })
+
             }
             else{
                 Toast.makeText(

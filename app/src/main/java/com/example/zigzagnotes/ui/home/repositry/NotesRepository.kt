@@ -59,6 +59,4 @@ class NotesRepository @Inject constructor(private val notesDao: NoteDao) {
             ErrorResponse(500, "Failed to update note: ${e.message}")
         }
     }
-
-
 }
