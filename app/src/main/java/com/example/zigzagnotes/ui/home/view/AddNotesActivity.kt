@@ -1,4 +1,4 @@
-package com.example.zigzagnotes.ui
+package com.example.zigzagnotes.ui.home.view
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,16 +8,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.zigzagnotes.databinding.ActivityAddNotesBinding
 import com.example.zigzagnotes.model.NoteModel
 import com.example.zigzagnotes.model.Notes
-import com.example.zigzagnotes.room.database.DataBaseHelperImp
-import com.example.zigzagnotes.room.database.DatabaseBuilder
 import com.example.zigzagnotes.ui.dialog.SaveDialog
 import com.example.zigzagnotes.ui.dialog.onClick
-import com.example.zigzagnotes.ui.home.view.HomeActivity
 import com.example.zigzagnotes.ui.home.viewmodel.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

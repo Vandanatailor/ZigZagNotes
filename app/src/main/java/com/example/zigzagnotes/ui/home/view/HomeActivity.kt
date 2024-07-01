@@ -13,14 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.zigzagnotes.databinding.ActivityHomeBinding
 import com.example.zigzagnotes.model.NoteModel
-import com.example.zigzagnotes.room.database.DataBaseHelperImp
-import com.example.zigzagnotes.room.database.DatabaseBuilder
-import com.example.zigzagnotes.ui.AddNotesActivity
-import com.example.zigzagnotes.ui.UpdateNotesActivity
 import com.example.zigzagnotes.ui.adpter.NotesAdapter
 import com.example.zigzagnotes.ui.dialog.DeleteDialog
-import com.example.zigzagnotes.ui.dialog.SaveDialog
-import com.example.zigzagnotes.ui.dialog.onClick
 import com.example.zigzagnotes.ui.dialog.onClickDelete
 import com.example.zigzagnotes.ui.home.viewmodel.NoteViewModel
 import com.example.zigzagnotes.util.Constants
@@ -32,14 +26,16 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
+class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
 
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: NoteViewModel by viewModels()
-
+    private lateinit var dialog: Dialog
+    private var deleteDialog= DeleteDialog()
     private lateinit var notesAdapter: NotesAdapter
+
     //    ++
-  //  private var notesList: List<NoteModel> = listOf()
+    //  private var notesList: List<NoteModel> = listOf()
     private var notesList: MutableList<NoteModel> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,15 +44,15 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
 
 //        val notesDatabase = DatabaseBuilder.getInstance(this)
 //        databaseHelper = DataBaseHelperImp(notesDatabase)
-//        dialog = Dialog(this)
-//        deleteDialog.onDeleteDialog(this,this)
+        dialog = Dialog(this)
+        deleteDialog.onDeleteDialog(this,this)
         setBottomVisiblity()
         observeData()
         getAllData()
 
     }
 
-    private fun getAllData(){
+    private fun getAllData() {
         viewModel.getAll()
     }
 
@@ -72,30 +68,30 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
             onClickEventsHandel()
         }
 
-//        binding.deleteAll.setOnClickListener {
-//            if(notesList.isEmpty()){
-//                Toast.makeText(this@HomeActivity, "There is no data for delete",
-//                    Toast.LENGTH_SHORT).show()
-//            }else{
-//                deleteDialog.showDialog()
-//            }
-//        }
+        binding.deleteAll.setOnClickListener {
+            if(notesList.isEmpty()){
+                Toast.makeText(this@HomeActivity, "There is no data for delete",
+                    Toast.LENGTH_SHORT).show()
+            }else{
+                deleteDialog.showDialog()
+            }
+        }
     }
 
-    override fun onDeleteNotes() {
-        TODO("Not yet implemented")
-    }
+//    override fun onDeleteNotes() {
+//        TODO("Not yet implemented")
+//    }
 
-        private fun setAdapter(){
-       val linearLayoutManager = GridLayoutManager(this,2)
+    private fun setAdapter() {
+        val linearLayoutManager = GridLayoutManager(this, 2)
         binding.rvData.layoutManager = linearLayoutManager
-        notesAdapter = NotesAdapter(this, notesList,this)
+        notesAdapter = NotesAdapter(this, notesList, this)
         binding.rvData.adapter = notesAdapter
         notesAdapter.notifyDataSetChanged()
         visiblityPLaceholder()
     }
 
-    private fun visiblityPLaceholder(){
+    private fun visiblityPLaceholder() {
         if (notesList.isEmpty()) {
             binding.lnPlaceholder.visibility = View.VISIBLE
             binding.rvData.visibility = View.GONE
@@ -104,31 +100,34 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
             binding.rvData.visibility = View.VISIBLE
         }
     }
+
     private fun observeData() {
 
         lifecycleScope.launch {
-        viewModel.listNotData.observe(this@HomeActivity , Observer {
-            val allNotes = it
-            Log.d("gggggggggggggg", "observeData: "+it)
-            notesList.clear()
-            notesList.addAll(allNotes)
-            setAdapter()
-            notesAdapter.notifyDataSetChanged()
-        })
+            viewModel.listNotData.observe(this@HomeActivity, Observer {
+                val allNotes = it
+                Log.d("gggggggggggggg", "observeData: " + it)
+                notesList.clear()
+                notesList.addAll(allNotes)
+                setAdapter()
+                notesAdapter.notifyDataSetChanged()
+            })
 
 
-        viewModel.errorResponse.observe(this@HomeActivity) {
-            if (it != null) {
-                showToast(it.errorMessage)
-                Log.d("PrintLog", "HomeKeyboard: " + it.errorMessage)
+            viewModel.errorResponse.observe(this@HomeActivity) {
+                if (it != null) {
+                    showToast(it.errorMessage)
+                    Log.d("PrintLog", "HomeKeyboard: " + it.errorMessage)
+                }
             }
         }
-        }
-}
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-//    private fun getData(){
+
+    //    private fun getData(){
 //        Log.d("dataisPrinting", "getData: ")
 //        lifecycleScope.launch {
 //            Log.d("dataisPrinting", "getData: "+notesList)
@@ -148,11 +147,11 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
 //        }
 //    }
     override fun selectItemCLick(position: Int, type: String) {
-        if(type.equals(Constants.Delete)){
+        if (type.equals(Constants.Delete)) {
             lifecycleScope.launch {
-               // withContext(Dispatchers.IO) {
-                   // databaseHelper.deleteDataById(notesList[position].id)
-               // }
+                // withContext(Dispatchers.IO) {
+                // databaseHelper.deleteDataById(notesList[position].id)
+                // }
                 viewModel.deleteById(notesList[position].id)
                 withContext(Dispatchers.Main) {
                     notesList.removeAt(position)
@@ -160,32 +159,31 @@ class HomeActivity : AppCompatActivity() ,ItemsCLickListner,onClickDelete {
                     visiblityPLaceholder()
                 }
             }
-        }else if(type.equals(Constants.DataShow)){
+        } else if (type.equals(Constants.DataShow)) {
             startActivity(
                 Intent(this@HomeActivity, UpdateNotesActivity::class.java)
                     .putExtra(Constants.ID, notesList[position].id)
             )
         }
     }
-//
+
+    //
     override fun onResume() {
         super.onResume()
         getAllData()
     }
 
-//    override fun onDeleteNotes() {
-//          lifecycleScope.launch {
-//              withContext(Dispatchers.IO){
-//                  databaseHelper.deleteAllNotes(notesList)
-//                  notesList.clear()
-//                  notesList.addAll(databaseHelper.getAllNotes())
-//              }
-//              withContext(Dispatchers.Main) {
-//                  notesAdapter.notifyDataSetChanged()
-//                  visiblityPLaceholder()
-//              }
-//          }
-//    }
-
-
+    private  fun allDeleteNotes()
+    {
+        viewModel.deleteAllNotes()
+        notesList.clear()
+        notesAdapter.notifyDataSetChanged()
+        visiblityPLaceholder()
+    }
+    override fun onDeleteNotes() {
+             allDeleteNotes()
+    }
 }
+
+
+

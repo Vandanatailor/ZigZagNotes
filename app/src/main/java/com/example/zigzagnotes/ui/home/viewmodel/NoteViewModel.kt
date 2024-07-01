@@ -1,5 +1,6 @@
 package com.example.zigzagnotes.ui.home.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,11 @@ class NoteViewModel @Inject constructor(private val repository: NotesRepository)
     private val _listNotData =MutableLiveData<List<NoteModel>>()
     val listNotData : LiveData<List<NoteModel>> get() = _listNotData
 
+    private val _getNotesById =MutableLiveData<NoteModel>()
+
+    val getNoteData : LiveData<NoteModel> get()=_getNotesById
+
+
     fun getAll() = viewModelScope.launch(Dispatchers.IO) {
         _listNotData.postValue(repository.getAll())
     }
@@ -31,6 +37,19 @@ class NoteViewModel @Inject constructor(private val repository: NotesRepository)
 
     fun deleteById(id : Int) =viewModelScope.launch(Dispatchers.Main) {
         _errorResponse.value=repository.deleteById(id)
+    }
+
+    fun getDataById(id : Int) =viewModelScope.launch(Dispatchers.IO) {
+        _getNotesById.postValue(repository.getDataById(id))
+    }
+
+    fun updateNotes(noteModel: NoteModel)=viewModelScope.launch(Dispatchers.IO){
+        Log.d("ViewModel", "Updating note: $noteModel")
+        _errorResponse.postValue(repository.updateNotes(noteModel))
+    }
+
+     fun deleteAllNotes()=viewModelScope.launch(Dispatchers.IO){
+         _errorResponse.postValue(repository.deleteAll())
     }
 
 }

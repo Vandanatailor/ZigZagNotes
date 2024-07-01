@@ -11,11 +11,15 @@ class DataBaseHelperImp(private val notesDatabase: NotesDatabase) : DataBaseHelp
     override suspend fun getNotesById(id: Int): NoteModel =
         notesDatabase.notesDao().getNotesById(id)
 
+    override suspend fun deleteAllNotes(notes: List<NoteModel>) {
+        TODO("Not yet implemented")
+    }
+
 //    override suspend fun updateDataById(id: Int, title: String, description: String) =
 //        notesDatabase.notesDao().updateNoteById(id, title, description)
 
-    override suspend fun deleteAllNotes(notes: List<NoteModel>) =
-        notesDatabase.notesDao().deleteAllNotes(notes)
+//    override suspend fun deleteAllNotes(notes: List<NoteModel>) =
+//        notesDatabase.notesDao().deleteAllNotes(notes)
 
     override suspend fun updateData(noteModel: NoteModel) =
         notesDatabase.notesDao().updateData(noteModel)
