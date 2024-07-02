@@ -28,7 +28,7 @@
             android:id="@+id/tv_type_some"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Are you sure ?"
+            android:text="@string/are_you_sure"
             android:textColor="@color/black_gray"
             android:textSize="@dimen/_15ssp"
             android:textStyle="normal" />
@@ -48,7 +48,7 @@
                 android:id="@+id/tv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:background="@drawable/gray_bg_"
                 android:backgroundTint="@color/red"
                 android:textColor="@color/white"

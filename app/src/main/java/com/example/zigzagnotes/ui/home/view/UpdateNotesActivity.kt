@@ -1,5 +1,6 @@
 package com.example.zigzagnotes.ui.home.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.example.zigzagnotes.databinding.ActivityUpdateNotesBinding
 import com.example.zigzagnotes.model.NoteModel
 import com.example.zigzagnotes.ui.home.viewmodel.NoteViewModel
 import com.example.zigzagnotes.util.Constants
+import com.example.zigzagnotes.util.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +23,12 @@ class UpdateNotesActivity : AppCompatActivity() {
     private var description: String = ""
     private val viewModel: NoteViewModel by viewModels()
     private lateinit var noteModel : NoteModel
+
+    override fun attachBaseContext(newBase: Context) {
+        val localeToApply = LocaleHelper.getPersistedLanguage(newBase)
+        val updatedContext = LocaleHelper.setLocale(newBase, localeToApply)
+        super.attachBaseContext(updatedContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

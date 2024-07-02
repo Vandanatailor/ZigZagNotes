@@ -1,7 +1,9 @@
 package com.example.zigzagnotes.ui.home.view
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,10 +17,13 @@ import com.example.zigzagnotes.databinding.ActivityHomeBinding
 import com.example.zigzagnotes.model.NoteModel
 import com.example.zigzagnotes.ui.adpter.NotesAdapter
 import com.example.zigzagnotes.ui.dialog.DeleteDialog
+import com.example.zigzagnotes.ui.dialog.SelectLanguage
 import com.example.zigzagnotes.ui.dialog.onClickDelete
+import com.example.zigzagnotes.ui.dialog.onClickable
 import com.example.zigzagnotes.ui.home.viewmodel.NoteViewModel
 import com.example.zigzagnotes.util.Constants
 import com.example.zigzagnotes.util.ItemsCLickListner
+import com.example.zigzagnotes.util.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,20 +31,23 @@ import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
+class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete,onClickable {
 
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: NoteViewModel by viewModels()
     private lateinit var dialog: Dialog
     private var deleteDialog= DeleteDialog()
+    private var selectLanguage= SelectLanguage()
     private lateinit var notesAdapter: NotesAdapter
     private var notesList: MutableList<NoteModel> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         dialog = Dialog(this)
         deleteDialog.onDeleteDialog(this,this)
+        selectLanguage.onSelectLangDialog(this,this)
         setBottomVisiblity()
         observeData()
         getAllData()
@@ -57,6 +65,7 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
         startActivity(intent)
     }
 
+
     private fun setBottomVisiblity() {
         binding.lvAddNotes.setOnClickListener {
             onClickEventsHandel()
@@ -70,6 +79,32 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
                 deleteDialog.showDialog()
             }
         }
+
+            binding.imgLangSelect.setOnClickListener {
+                    val currentLanguage = LocaleHelper.getPersistedLanguage(this)
+                if(currentLanguage=="hi"){
+                    LocaleHelper.setLocale(this@HomeActivity, "en")
+                }else{
+                    LocaleHelper.setLocale(this@HomeActivity, "hi")
+                }
+                updateLocale()
+                recreate()
+
+            }
+    }
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase))
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        LocaleHelper.setLocale(this, LocaleHelper.getPersistedLanguage(this))
+    }
+
+
+    private fun updateLocale() {
+        val context = LocaleHelper.setLocale(this, LocaleHelper.getPersistedLanguage(this@HomeActivity))
+        resources.updateConfiguration(context.resources.configuration, context.resources.displayMetrics)
     }
 
     private fun setAdapter() {
@@ -150,6 +185,11 @@ class HomeActivity : AppCompatActivity(), ItemsCLickListner, onClickDelete {
     override fun onDeleteNotes() {
              allDeleteNotes()
     }
+
+    override fun onLanguageSelect() {
+      // recreate()
+    }
+
 }
 
 

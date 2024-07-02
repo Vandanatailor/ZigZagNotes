@@ -19,11 +19,22 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notes"
+        android:text="@string/notes"
         android:textColor="@color/white"
         android:textSize="@dimen/_22sdp"
         android:layout_weight="1"
         android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_lang_select"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/gray_bg_"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/img_language_select"
+            app:tint="@color/white" />
+
     <ImageView
         android:id="@+id/delete_all"
         android:layout_width="@dimen/_30sdp"

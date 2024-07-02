@@ -1,8 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZigZagNotes</string>
-    <string name="no_notes_avilable">No notes avilable</string>
-    <string name="type_something_here">Type Something Here.....</string>
-    <string name="title">Title</string>
     <string name="notes">Notes</string>
     <string name="save_changes">Save Changes</string>
     <string name="discard">Discard</string>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ZigZagNotes</string>
+    <string name="no_notes_avilable">कोई नोट उपलब्ध नहीं है</string>
+    <string name="type_something_here">यहाँ कुछ लिखें.....</string>
+    <string name="title">शीर्षक</string>
+    <string name="notes">टिप्पणियाँ</string>
+    <string name="save_changes">परिवर्तनों को सुरक्षित करें</string>
+    <string name="discard">खारिज करे</string>
+    <string name="save">संचित करे</string>
+    <string name="delete">हटाये</string>
+    <string name="are_you_sure">क्या आपको यकीन है ?</string>
+    <string name="select_the_app_language">ऐप भाषा चुनें</string>
+    <string name="hindi">हिंदी</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="done">ठीक है</string>
+</resources>

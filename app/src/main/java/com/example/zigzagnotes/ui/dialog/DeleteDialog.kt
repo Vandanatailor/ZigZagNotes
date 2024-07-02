@@ -38,7 +38,6 @@ class DeleteDialog {
             onClick.onDeleteNotes()
         }
 
-
     }
 
 }

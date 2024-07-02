@@ -1,6 +1,7 @@
 package com.example.zigzagnotes.ui.home.view
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.example.zigzagnotes.model.Notes
 import com.example.zigzagnotes.ui.dialog.SaveDialog
 import com.example.zigzagnotes.ui.dialog.onClick
 import com.example.zigzagnotes.ui.home.viewmodel.NoteViewModel
+import com.example.zigzagnotes.util.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,6 +27,12 @@ class AddNotesActivity : AppCompatActivity(), onClick {
     private var saveDialog = SaveDialog()
     lateinit var dialog: Dialog
     private val viewModel: NoteViewModel by viewModels()
+
+    override fun attachBaseContext(newBase: Context) {
+        val localeToApply = LocaleHelper.getPersistedLanguage(newBase)
+        val updatedContext = LocaleHelper.setLocale(newBase, localeToApply)
+        super.attachBaseContext(updatedContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
